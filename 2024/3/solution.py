@@ -11,9 +11,7 @@ DO_DONT_REGEX = re.compile("(?s)do\(\)(.*?)don't\(\)")
 p = Path(__file__).with_name("input.txt")
 with p.open("r") as f:
     line = f.read().strip()
-    D = line
 
-reports = []
 solution_1 = 0
 solution_2 = 0
 
