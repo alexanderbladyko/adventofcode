@@ -66,7 +66,6 @@ def check_loop(obstruction):
             direction = (direction + 1) % len(DIRECTIONS)
         else:
             if (nx, ny, direction) in positions:
-                # print(nx, ny, direction)
                 return True
             x, y = nx, ny
             positions.add((x, y, direction))
