@@ -18,52 +18,53 @@ for i, char in enumerate(line):
         stack.extend([int(i / 2)] * count)
 
 
-# index = 0
-# for i, char in enumerate(line):
-#     count = int(char)
-#     for j in range(count):
-#         if not stack:
-#             break
-#         solution_1 += index * stack.pop(0 if i % 2 == 0 else -1)
-#         index += 1
-#     if index >= final_size:
-#         break
+index = 0
+for i, char in enumerate(line):
+    count = int(char)
+    for j in range(count):
+        if not stack:
+            break
+        solution_1 += index * stack.pop(0 if i % 2 == 0 else -1)
+        index += 1
+    if index >= final_size:
+        break
+
+print(f"Solution 1 - {solution_1}")
 
 solution_2 = 0
 files = []
-spaces = []
+
 index = 0
 for i, char in enumerate(line):
-    size = int(char)
-    if i % 2 == 0:
-        files.append((index, size, int(i / 2)))
-    else:
-        spaces.append((index, size))
+    files.append((int(char), int(i / 2) if i % 2 == 0 else "_"))
+
+
+used = set()
+
+for file_index in range(len(files) - 1, 0, -1):
+    file = files[file_index]
+    if file[1] != "_" and file not in used:
+        used.add(file)
+        for i, space in enumerate(files):
+            if i >= file_index:
+                break
+
+            if space[1] == "_":
+                if space[0] == file[0]:
+                    files[i], files[file_index] = files[file_index], files[i]
+                    break
+                elif space[0] > file[0]:
+                    remaining = space[0] - file[0]
+                    files[i], files[file_index] = file, (file[0], "_")
+                    files.insert(i + 1, (remaining, "_"))
+                    break
+
+index = 0
+for size, value in files:
+    if value != "_":
+        for i in range(0, size):
+            solution_2 += (index + i) * value
     index += size
 
 
-
-# for i in range(len(files) - 1, 0, -1):
-#     file_index, file_size, value = files.pop()
-
-#     index = -1
-#     for j in range(0, i - 1):
-#         left_index, left_size, _ = files[j]
-#         right_index, _, _ = files[j + 1]
-#         # Can insert
-#         if left_index + left_size + file_size <= right_index:
-#             index = j
-#             i += 1
-#             break
-#     files.insert(index + 1, (files[index][0] + files[index][1], file_size, value))
-
-
-
-
-
-
-# print(files)
-
-
-print(f"Solution 1 - {solution_1}")
 print(f"Solution 2 - {solution_2}")
