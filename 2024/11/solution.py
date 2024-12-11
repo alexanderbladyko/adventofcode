@@ -36,7 +36,6 @@ def blink(counter):
 
 counter = Counter(numbers)
 for i in range(BLINKS_2):
-    print(i)
     if i == BLINKS:
         solution_1 = sum(v for v in counter.values())
     counter = blink(counter)
