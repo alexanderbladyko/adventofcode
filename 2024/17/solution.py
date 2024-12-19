@@ -59,7 +59,7 @@ while instruction_pointer < len(commands) - 1:
         output.extend(new_output)
 
 
-print("Solution 1 - ", ','.join(map(str, output)))
+print("Solution 1 - ", ",".join(map(str, output)))
 
 
 def exec_commands(regs, commands):
@@ -81,13 +81,17 @@ def exec_commands(regs, commands):
 # I've stole this one. Too hard for me
 def find_register_a_for_self_output(registers, commands):
     numbers = []
-    todo = [(len(commands) - 1, 0)]  # Start from the last position of the program with value '0'
+    todo = [
+        (len(commands) - 1, 0)
+    ]  # Start from the last position of the program with value '0'
     for p, v in todo:
         # Test all possible values of 'a' within the range [8*v, 8*(v+1) - 1] --> 2^3 = 8 (cause 3 bits computer)
         for a in range(8 * v, 8 * (v + 1)):
             # Check if running the program with the current 'a' produces the remaining part of the program
             if exec_commands([a, registers[1], registers[2]], commands) == commands[p:]:
-                if p == 0:  # If we're at the start of the program, we've found a valid 'a'
+                if (
+                    p == 0
+                ):  # If we're at the start of the program, we've found a valid 'a'
                     numbers.append(a)
                 else:
                     # Otherwise, move one step back and continue searching for valid 'a' values
