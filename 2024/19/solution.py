@@ -15,9 +15,10 @@ def check_pattern(pattern):
     for i in range(len(pattern)):
         index = i + 1
         for towel in towels:
-            if pattern[index - len(towel):index] == towel and dp[index - len(towel)]:
+            if pattern[index - len(towel) : index] == towel and dp[index - len(towel)]:
                 dp[index] += dp[index - len(towel)]
     return dp[-1]
+
 
 solution_1 = 0
 solution_2 = 0
