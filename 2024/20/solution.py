@@ -30,9 +30,6 @@ for x in range(-N, N + 1):
             CHEAT_OPTIONS.append((x, y))
 
 
-print(CHEAT_OPTIONS)
-
-
 def dijkstra(grid, start):
     paths = []
     for row in grid:
